@@ -21,5 +21,5 @@ adds them in a list then it goes trough every file, checks for position.x, posit
 ## Discord Server:
 <a href="https://discord.gg/7JXXvkufJK"><img src="https://invidget.switchblade.xyz/7JXXvkufJK" alt="https://discord.gg/7JXXvkufJK"/></a>
 
-![image](https://github.com/user-attachments/assets/cd681de7-6f58-4cb8-a332-db2202fb6970)
+![image](https://github.com/user-attachments/assets/dc628869-b45d-4827-af69-3eb9ffb48ef7)
 ##### I know this User Interface is not good, i made it to save time
