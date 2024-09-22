@@ -15,13 +15,16 @@ public final class Interface extends JFrame {
     private final JCheckBox showEachFileCheckBox;
     private final JCheckBox openOutputFolderCheckBox;
     private final JCheckBox fileLoggingCheckBox;
+    private final JCheckBox splitFilesCheckbox;
+    private final JLabel rangeSliderLabel;
+    private final JLabel filesPerFolderLabel;
     private final JSlider rangeSlider;
-    private final JLabel rangeLabel;
+    private final JSlider filesPerFolderSlider;
     private final JButton startButton;
 
     public Interface() {
         setTitle(Variables.title);
-        setSize(590, 320);
+        setSize(450, 360);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
@@ -33,7 +36,6 @@ public final class Interface extends JFrame {
         // Input Folder Path selection
         JLabel inputFolderPathLabel = new JLabel("Input Folder Path:");
         inputFolderPathField = new JTextField(Functions.instance.inputFolderPath);
-        inputFolderPathField.setPreferredSize(new Dimension(600, 25));
         inputFolderPathField.setEditable(false);
         inputFolderPathField.addMouseListener(new FolderSelectInputListener(inputFolderPathField));
         panel.add(inputFolderPathLabel);
@@ -42,11 +44,18 @@ public final class Interface extends JFrame {
         // Output Folder Path selection
         JLabel outputFolderPathLabel = new JLabel("Output Folder Path:");
         outputFolderPathField = new JTextField(Functions.instance.outputFolderPath);
-        outputFolderPathField.setPreferredSize(new Dimension(600, 25));
         outputFolderPathField.setEditable(false);
         outputFolderPathField.addMouseListener(new FolderSelectOutputListener(outputFolderPathField));
         panel.add(outputFolderPathLabel);
         panel.add(outputFolderPathField);
+
+        // Enable File Logging
+        JLabel fileLoggingLabel = new JLabel("Enable File Logging:");
+        fileLoggingCheckBox = new JCheckBox();
+        fileLoggingCheckBox.setSelected(Functions.instance.fileLogging);
+        fileLoggingCheckBox.addItemListener(new AutoSaveItemListener());
+        panel.add(fileLoggingLabel);
+        panel.add(fileLoggingCheckBox);
 
         // Show Each File
         JLabel showEachFileLabel = new JLabel("Show Each File in logger:");
@@ -64,20 +73,12 @@ public final class Interface extends JFrame {
         panel.add(openOutputFolderLabel);
         panel.add(openOutputFolderCheckBox);
 
-        // Enable File Logging
-        JLabel fileLoggingLabel = new JLabel("Enable File Logging:");
-        fileLoggingCheckBox = new JCheckBox();
-        fileLoggingCheckBox.setSelected(Functions.instance.fileLogging);
-        fileLoggingCheckBox.addItemListener(new AutoSaveItemListener());
-        panel.add(fileLoggingLabel);
-        panel.add(fileLoggingCheckBox);
-
         // Slider for range/tolerance
-        JLabel rangeSliderLabel = new JLabel("Duplicate Position Tolerance (Range):");
-        rangeSlider = new JSlider(JSlider.HORIZONTAL, 1, 100, (int) Functions.instance.maxDifference);
+        rangeSliderLabel = new JLabel("Duplicate Position Tolerance (" + (int) Functions.instance.maxDifference + "m):");
+        rangeSlider = new JSlider(JSlider.HORIZONTAL, 1, 99, (int) Functions.instance.maxDifference);
         rangeSlider.setMajorTickSpacing(10);
         rangeSlider.setMinorTickSpacing(1);
-        rangeSlider.setPaintTicks(true);
+        rangeSlider.setPaintTicks(false);
         rangeSlider.addChangeListener(e -> updateRange());
 
         if (rangeSlider.getValue() == 0) {
@@ -85,12 +86,29 @@ public final class Interface extends JFrame {
         }
 
         // Label to show current slider value
-        rangeLabel = new JLabel("Max Difference between Two Positions: " + (int) Functions.instance.maxDifference + "m");
         panel.add(rangeSliderLabel);
         panel.add(rangeSlider);
-        panel.add(rangeLabel);
 
         add(panel, BorderLayout.CENTER);
+
+        // Split Files boolean
+        JLabel splitFilesLabel = new JLabel("Split Files Into Folders:");
+        splitFilesCheckbox = new JCheckBox();
+        splitFilesCheckbox.setSelected(Functions.instance.splitFilesIntoFolders);
+        splitFilesCheckbox.addItemListener(new AutoSaveItemListener());
+        panel.add(splitFilesLabel);
+        panel.add(splitFilesCheckbox);
+
+        // Files Per Folder
+        filesPerFolderLabel = new JLabel("Files Per Folder: 1000");
+        filesPerFolderSlider = new JSlider(JSlider.HORIZONTAL, 200, 1000, Functions.instance.filesPerFolder);
+        filesPerFolderSlider.setMajorTickSpacing(10);
+        filesPerFolderSlider.setMinorTickSpacing(1);
+        filesPerFolderSlider.setPaintTicks(false);
+        filesPerFolderSlider.addChangeListener(e -> saveSettings());
+        filesPerFolderSlider.addChangeListener(e -> updateRange());
+        panel.add(filesPerFolderLabel);
+        panel.add(filesPerFolderSlider);
 
         // Start Processing button
         JPanel buttonPanel = new JPanel();
@@ -106,8 +124,13 @@ public final class Interface extends JFrame {
     // Method to update the range/tolerance based on the slider value
     private void updateRange() {
         int rangeValue = rangeSlider.getValue();
-        Functions.instance.maxDifference = rangeValue;  // Update the tolerance in the Functions instance
-        rangeLabel.setText("Max Difference between Two Positions: " + rangeValue + "m");  // Update the displayed value
+        Functions.instance.maxDifference = rangeValue;
+        rangeSliderLabel.setText("Duplicate Position Tolerance (" + rangeValue + "m):");
+
+        int filesPerFolderValue = filesPerFolderSlider.getValue();
+        Functions.instance.filesPerFolder = filesPerFolderValue;
+        filesPerFolderLabel.setText("Files Per Folder: " + filesPerFolderValue);
+
         saveSettings();
     }
 
