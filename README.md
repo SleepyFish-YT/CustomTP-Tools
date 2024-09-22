@@ -8,6 +8,7 @@ Takes your Custom Teleport .json files and checks if there are duplicated positi
 - Show Each file in Logger
 - Open Output When Finished
 - Duplicate Position Tolerance (Range)
+- File Splitting
 
 # Explenation
 this programm made by sleepyfish just goes trough every file in the selected input folder gets all the files ending with ".json" files and that are not empty,
