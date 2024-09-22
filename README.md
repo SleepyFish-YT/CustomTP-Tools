@@ -1,5 +1,5 @@
-# TP-Name-Editor
-Takes your Custom Teleport .json files and edits theire Json Field "name" to the file name for better organization
+# TP-Dupe-Checker
+Takes your Custom Teleport .json files and checks if there are duplicated positions (json array field)
 
 # Explenation
 this programm made by sleepyfish just goes trough every file in the selected input folder gets all the files ending with ".json" files and that are not empty,
