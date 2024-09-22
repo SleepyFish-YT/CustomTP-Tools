@@ -31,7 +31,7 @@ public class Functions {
     String inputFolderPath = this.desktopPath + "\\korepi\\teleport";
 
     // Output folder path (this folder is used to save the modified custom teleport files)
-    String outputFolderPath = this.desktopPath + "\\korepi\\teleport\\output";
+    String outputFolderPath = this.inputFolderPath + "\\output";
 
     // Show each file in the logging process (used for debugging)
     boolean showEachFile = false;
