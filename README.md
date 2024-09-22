@@ -21,4 +21,4 @@ adds them in a list then it goes trough every file, checks for position.x, posit
 <a href="https://discord.gg/7JXXvkufJK"><img src="https://invidget.switchblade.xyz/7JXXvkufJK" alt="https://discord.gg/7JXXvkufJK"/></a>
 
 ![image](https://github.com/user-attachments/assets/0aec387f-f065-4bb5-99b0-c750443f533f)
-#### I know this User Interface is not good, i made it to save time
+##### I know this User Interface is not good, i made it to save time
