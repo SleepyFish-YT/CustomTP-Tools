@@ -1,5 +1,6 @@
 # TP-Dupe-Checker
 Takes your Custom Teleport .json files and checks if there are duplicated positions (json array field)
+Main call: `Interface.main();`
 
 # Features
 - Custom Input Folder
