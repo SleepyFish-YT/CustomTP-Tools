@@ -45,6 +45,12 @@ public class Functions {
     // Tolerance range for comparing duplicate positions
     float maxDifference = 50.0F;
 
+    // Splitting files into folders for better optimization
+    boolean splitFilesIntoFolders = true;
+
+    // Maximum number of files per folder
+    int filesPerFolder = 1000;
+
     // Files
     File inputFolder = new File(inputFolderPath);
     File outputFolder = new File(outputFolderPath);
@@ -92,7 +98,7 @@ public class Functions {
                 try {
                     this.logFile.createNewFile();
                 } catch (Exception e) {
-                    this.log("Error: Could not create this.log file!");
+                    this.log("Error: Could not create log file!");
                 }
             }
         }
@@ -118,11 +124,11 @@ public class Functions {
             if (isJson(file) && !isEmpty(file)) {
                 if (this.showEachFile)
                     this.log("Info: Added Valid file: " + file.getName());
-                
+
                 jsonFiles.add(file);
             }
         }
-        
+
         if (!this.showEachFile && !jsonFiles.isEmpty()) {
             this.log("Info: Found " + jsonFiles.size() + " valid files.");
         }
@@ -177,7 +183,7 @@ public class Functions {
 
                 JsonArray positionB = jsonB.getAsJsonArray("position");
 
-                // If positionB is a duplicate of positionA, mark it as already logged (but don't this.log it)
+                // If positionB is a duplicate of positionA, mark it as already logged (but don't log it)
                 if (isPositionDuplicate(positionA, positionB, maxDifference)) {
                     alreadyLogged.add(fileB);  // Mark as already logged
                     loggedPositions.add(positionB);  // Mark this position as logged
@@ -199,11 +205,39 @@ public class Functions {
             this.log("Info: Total duplicate positions found: " + totalDuplicatePositions);  // Log total duplicates found
             this.log("Info: Total files analyzed: " + jsonFiles.size());
 
-            for (final File file : uniqueFiles) {
-                try {
-                    Files.copy(file.toPath(), new File(outputFolder, file.getName()).toPath());
-                } catch (Exception e) {
-                    this.log("Error: copying file: " + file.getName());
+            // Split files into folders if the option is enabled
+            if (this.splitFilesIntoFolders) {
+                int folderCount = 1;
+                int fileCounter = 0;
+                File currentSplitFolder = new File(outputFolder, "split" + folderCount);
+                currentSplitFolder.mkdirs();  // Create the first folder
+                this.log("Info: Created folder: " + currentSplitFolder.getAbsolutePath());
+
+                for (final File file : uniqueFiles) {
+                    // If fileCounter hits the limit, create a new folder
+                    if (fileCounter == filesPerFolder) {
+                        folderCount++;
+                        fileCounter = 0;
+                        currentSplitFolder = new File(outputFolder, "split" + folderCount);
+                        currentSplitFolder.mkdirs();  // Create the next folder
+                        this.log("Info: Created folder: " + currentSplitFolder.getAbsolutePath());
+                    }
+
+                    try {
+                        Files.copy(file.toPath(), new File(currentSplitFolder, file.getName()).toPath());
+                        fileCounter++;
+                    } catch (Exception e) {
+                        this.log("Error: copying file: " + file.getName());
+                    }
+                }
+            } else {
+                // If not splitting, just copy to output folder
+                for (final File file : uniqueFiles) {
+                    try {
+                        Files.copy(file.toPath(), new File(outputFolder, file.getName()).toPath());
+                    } catch (Exception e) {
+                        this.log("Error: copying file: " + file.getName());
+                    }
                 }
             }
         }
