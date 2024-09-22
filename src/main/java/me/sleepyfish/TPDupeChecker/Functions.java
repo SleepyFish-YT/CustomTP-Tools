@@ -25,11 +25,13 @@ public class Functions {
 
     public static final Functions instance = new Functions();
 
+    private final String desktopPath = System.getProperty("user.home") + "\\Desktop";
+
     // Custom teleport folder path (this folder is used to get the un-modified custom teleport files)
-    String inputFolderPath = "C:\\Users\\Luca\\Desktop\\korepi\\teleport";
+    String inputFolderPath = this.desktopPath + "\\korepi\\teleport";
 
     // Output folder path (this folder is used to save the modified custom teleport files)
-    String outputFolderPath = "C:\\Users\\Luca\\Desktop\\korepi\\teleport\\output";
+    String outputFolderPath = this.desktopPath + "\\korepi\\teleport\\output";
 
     // Show each file in the logging process (used for debugging)
     boolean showEachFile = false;
