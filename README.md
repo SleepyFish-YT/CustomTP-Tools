@@ -7,27 +7,27 @@ This is a Very usefull KorePI-CustomTP-Tool it has usefull tools to manage your 
 - Position Sort Tool
 - File Splitter Tool
 
-# Name Edit Tool
+## Name Edit Tool
 This tool is used to edit the json fields of your teleport files
 Example: Easily clear all "name" and "description" json fields of all your teleports to save space, making korePI load it faster and more!
 
-# Dupe Find Tool
+## Dupe Find Tool
 This tool is used to find duplicate teleport positions to remove them
 Example: Easily delete all duplicates to later when yousing the auto teleport save a lot of time!
 
-# Position Sort Tool
+## Position Sort Tool
 This tool is used to sort the positions of your teleports (low pos to high pos)
 Example: Easily sort all teleports by comparing each x, y, z coordinates!
 
-# File Splitter Tool
+## File Splitter Tool
 This tool is used to split your files into multiple folders
 Example: Easily spread your 20'000 files in 20 folders, each containing 1000 teleports, so your korePI wont crash when loading them!
 
-# Dependencies used
+## Dependencies used
 - JavaFX
 - Gson
 
-# Preview
+## Preview
 ![nameEdit](https://github.com/user-attachments/assets/57e6da52-9abc-430b-b7aa-a7577bb55ae8)
 ![dupeFind](https://github.com/user-attachments/assets/1b0793e4-81f3-4b30-86f2-fe20bca8c357)
 ![posiSort](https://github.com/user-attachments/assets/80f9b194-4496-4cad-9450-7c4186bc5580)
