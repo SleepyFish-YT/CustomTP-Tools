@@ -8,7 +8,7 @@ This is a Very usefull KorePI-CustomTP-Tool it has usefull tools to manage your 
 - File Splitter Tool
 
 # Showcase
-[youtubbb](https://youtu.be/PqTCgHd5rDU)
+[To watch video click me](https://youtu.be/PqTCgHd5rDU)
 
 ## Name Edit Tool
 This tool is used to edit the json fields of your teleport files
