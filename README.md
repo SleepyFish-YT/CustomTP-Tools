@@ -40,5 +40,8 @@ Example: Easily spread your 20'000 files in 20 folders, each containing 1000 tel
 
 ##### I know this User Interface is not good, i made it to save time
 
-# Discord Server
+## Discord Server
 <a href="https://discord.gg/7JXXvkufJK"><img src="https://invidget.switchblade.xyz/7JXXvkufJK" alt="https://discord.gg/7JXXvkufJK"/></a>
+
+###### Signed by SleepyFish.
+
